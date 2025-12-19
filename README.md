@@ -1,4 +1,4 @@
-# Pokemon Team Builder - Frontend Coding Challenge
+# Pokemon Team Builder
 
 Welcome to the Pokemon Team Builder coding challenge! This is a **1-hour live coding interview** where you'll build a React application using the [PokeAPI](https://pokeapi.co/).
 
@@ -159,7 +159,7 @@ GET /type/{name}                    # Get type info (damage relations)
 ## Project Structure
 
 ```
-pokechallenge/
+pokemon-challenge/
 ├── deno.json           # Workspace configuration
 ├── challenge/          # Work on this during the interview
 │   ├── deno.json
