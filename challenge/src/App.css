@@ -1,0 +1,214 @@
+.app {
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #444;
+}
+
+.header h1 {
+  margin-bottom: 0.5rem;
+}
+
+.header p {
+  color: #888;
+  margin: 0;
+}
+
+/* Main Layout */
+.main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 900px) {
+  .main {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Sections */
+section {
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+section h2 {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+section h3 {
+  margin: 1.5rem 0 1rem;
+  font-size: 1rem;
+  color: #888;
+}
+
+.placeholder {
+  color: #666;
+  font-style: italic;
+  padding: 2rem;
+  text-align: center;
+  border: 2px dashed #333;
+  border-radius: 8px;
+}
+
+/* Team Slots */
+.team-slots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .team-slots {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.team-slot {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.team-slot.empty {
+  background: #2a2a2a;
+  border: 2px dashed #444;
+}
+
+.team-slot:not(.empty):hover {
+  transform: scale(1.02);
+}
+
+.slot-number {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: 0.75rem;
+  color: #666;
+  font-weight: bold;
+}
+
+.slot-placeholder {
+  color: #555;
+  font-size: 0.875rem;
+}
+
+/* Type Coverage */
+.type-coverage {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #333;
+}
+
+/* Utility Classes - Feel free to use these */
+.type-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin: 0.25rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: #888;
+}
+
+.error {
+  background: #3a1a1a;
+  color: #ff6b6b;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* Pokemon Card - Example structure */
+.pokemon-card {
+  background: #2a2a2a;
+  border-radius: 12px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pokemon-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.pokemon-card img {
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+.pokemon-card .name {
+  text-transform: capitalize;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+/* Search Input */
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 2px solid #333;
+  background: #2a2a2a;
+  color: inherit;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #646cff;
+}
+
+.search-input::placeholder {
+  color: #666;
+}
+
+/* Pokemon Grid */
+.pokemon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.pokemon-grid::-webkit-scrollbar {
+  width: 8px;
+}
+
+.pokemon-grid::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 4px;
+}
+
+.pokemon-grid::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
+}
+
+.pokemon-grid::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

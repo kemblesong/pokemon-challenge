@@ -1,0 +1,65 @@
+{
+  "workspace": ["./challenge", "./solution"],
+  "nodeModulesDir": "auto",
+  "imports": {
+    "react": "npm:react@^18.3.1",
+    "react-dom": "npm:react-dom@^18.3.1",
+    "react-dom/client": "npm:react-dom@^18.3.1/client",
+    "react/jsx-runtime": "npm:react@^18.3.1/jsx-runtime",
+    "vite": "npm:vite@^6.0.3",
+    "@vitejs/plugin-react": "npm:@vitejs/plugin-react@^4.3.4",
+    "@deno/vite-plugin": "npm:@deno/vite-plugin@^1.0.6",
+    "vitest": "npm:vitest@^2.1.8",
+    "vitest/config": "npm:vitest@^2.1.8/config",
+    "@testing-library/react": "npm:@testing-library/react@^16.1.0",
+    "@testing-library/dom": "npm:@testing-library/dom@^10.4.0",
+    "@testing-library/jest-dom": "npm:@testing-library/jest-dom@^6.6.3",
+    "jsdom": "npm:jsdom@^25.0.1"
+  },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "lib": ["dom", "dom.iterable", "deno.ns", "esnext"],
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "tasks": {
+    "dev:challenge": "cd challenge && deno run -A npm:vite",
+    "dev:solution": "cd solution && deno run -A npm:vite",
+    "build:challenge": "cd challenge && deno run -A npm:vite build",
+    "build:solution": "cd solution && deno run -A npm:vite build",
+    "preview:challenge": "cd challenge && deno run -A npm:vite preview",
+    "preview:solution": "cd solution && deno run -A npm:vite preview",
+    "test:challenge": "cd challenge && deno run -A npm:vitest run",
+    "test:solution": "cd solution && deno run -A npm:vitest run",
+    "test": "deno task test:challenge && deno task test:solution",
+    "lint": "deno lint",
+    "fmt": "deno fmt",
+    "check": "deno check challenge/src/**/*.ts challenge/src/**/*.tsx solution/src/**/*.ts solution/src/**/*.tsx"
+  },
+  "lint": {
+    "include": [
+      "challenge/src/",
+      "challenge/tests/",
+      "solution/src/",
+      "solution/tests/"
+    ],
+    "rules": {
+      "tags": ["recommended"]
+    }
+  },
+  "fmt": {
+    "include": [
+      "challenge/src/",
+      "challenge/tests/",
+      "solution/src/",
+      "solution/tests/"
+    ],
+    "lineWidth": 100,
+    "indentWidth": 2,
+    "semiColons": true,
+    "singleQuote": true
+  }
+}
