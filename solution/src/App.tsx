@@ -1,25 +1,16 @@
+import { useState } from 'react';
 import './App.css';
-
-/**
- * Pokemon Team Builder
- *
- * Your task: Build a Pokemon team builder with type coverage analysis
- *
- * Requirements:
- * 1. Pokemon Browser - Search and display Pokemon from the API
- * 2. Team Builder - Add/remove Pokemon to build a team of 6
- * 3. Type Coverage - Show team weaknesses and resistances
- *
- * Helpful imports you might need:
- * - import { fetchPokemonList, fetchPokemon } from './services/api'
- * - import { TYPE_CHART, getWeaknesses, getResistances } from './constants/typeChart'
- * - import { TYPE_COLORS } from './constants/typeColors'
- * - import type { Pokemon, TypeName } from './types/pokemon'
- *
- * Good luck!
- */
+import { usePokemon } from './hooks/usePokemon';
+import { useTeam } from './hooks/useTeam';
+import { PokemonCard } from './components/PokemonCard';
+import { TeamSlot } from './components/TeamSlot';
+import { TypeCoverageDisplay } from './components/TypeCoverageDisplay';
 
 function App() {
+  const { pokemon, loading, error, searchQuery, setSearchQuery } = usePokemon();
+  const { team, addToTeam, removeFromTeam, isInTeam, reorderTeam } = useTeam();
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+
   return (
     <div className="app">
       <header className="header">
@@ -30,32 +21,53 @@ function App() {
       <main className="main">
         <section className="pokemon-browser">
           <h2>Pokemon Browser</h2>
-          {/* TODO: Add search input */}
-          {/* TODO: Display Pokemon list */}
-          <p className="placeholder">
-            Implement Pokemon search and display here
-          </p>
+
+          <input
+            type="text"
+            className="search-input"
+            placeholder="Search Pokemon..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+
+          {loading && <div className="loading">Loading Pokemon...</div>}
+
+          {error && <div className="error">{error}</div>}
+
+          {!loading && !error && (
+            <div className="pokemon-grid">
+              {pokemon.map((p) => (
+                <PokemonCard
+                  key={p.id}
+                  pokemon={p}
+                  onClick={() => addToTeam(p)}
+                  disabled={isInTeam(p.id)}
+                />
+              ))}
+            </div>
+          )}
         </section>
 
         <section className="team-builder">
-          <h2>Your Team (0/6)</h2>
-          {/* TODO: Display team slots */}
-          {/* TODO: Show type coverage analysis */}
+          <h2>Your Team ({team.length}/6)</h2>
+
           <div className="team-slots">
             {[...Array(6)].map((_, index) => (
-              <div key={index} className="team-slot empty">
-                <span className="slot-number">{index + 1}</span>
-                <span className="slot-placeholder">Empty</span>
-              </div>
+              <TeamSlot
+                key={index}
+                pokemon={team[index] || null}
+                slotIndex={index}
+                onRemove={() => team[index] && removeFromTeam(team[index].id)}
+                isDragging={draggedIndex === index}
+                onDragStart={() => setDraggedIndex(index)}
+                onDragEnd={() => setDraggedIndex(null)}
+                onDrop={(fromIndex) => reorderTeam(fromIndex, index)}
+                draggedIndex={draggedIndex}
+              />
             ))}
           </div>
 
-          <div className="type-coverage">
-            <h3>Type Coverage</h3>
-            <p className="placeholder">
-              Add Pokemon to see type analysis
-            </p>
-          </div>
+          <TypeCoverageDisplay team={team} />
         </section>
       </main>
     </div>
